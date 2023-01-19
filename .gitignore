@@ -1,0 +1,6 @@
+./pl/*.txt
+./pl/*.doc
+./pl/*.docx
+./pl/*.pdf
+.sql/*.doc
+.sql/*.docx
