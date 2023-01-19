@@ -4,3 +4,5 @@ pl/*.docx
 pl/*.pdf
 sql/*.doc
 sql/*.docx
+sql/*.txt
+sql/*.pdf
