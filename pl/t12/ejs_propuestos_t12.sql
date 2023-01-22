@@ -6,8 +6,7 @@ SET VERIFY OFF;
 
 /*1-Construye un bloque PL/SQL que escriba el texto HOLA.*/
 
-set serveroutput on;
---necesario para que se muestre por pantalla
+set serveroutput on; --necesario para que se muestre por pantalla
 
 BEGIN
 	dbms_output.put_line('Hola');
@@ -81,11 +80,44 @@ Resolverlo con IF….ELSE y con CASE.
 Introduzca un valor para vt_empno: 7839*/
 
 DECLARE
-	
+	x_emple number;
+	vc_emple number;
+	v_aumento number DEFAULT 0;
+	v_oficio emple.oficio%type;
 BEGIN
-
+	x_emple:=&e_empno;
+	select oficio into v_oficio from emple where emp_no=vc_emple;
+	SELECT COUNT(*) INTO VC_EMPLE FROM EMPLE WHERE DIR = x_emple;
+	IF VC_EMPLE = 0 THEN
+		V_AUMENTO:=V_AUMENTO+50;
+	ELSIF VC_EMPLE=1 THEN
+		V_AUMENTO:=V_AUMENTO+80;
+	ELSIF VC_EMPLE>2 THEN
+		V_AUMENTO:=V_AUMENTO+100;
+	ELSIF VC_EMPLE>3 THEN
+		V_AUMENTO:=V_AUMENTO+110;
+	END IF;
+	IF V_OFICIO = 'PRESIDENTE' THEN
+		V_AUMENTO:=AUMENTO+30;
+	END IF;
+	UPDATE EMPLE SET SALARIO = SALARIO + V_AUMENTO WHERE EMP_NO = x_EMPLE;
+	DBMS_OUTPUT.PUT_LINE(V_AUMENTO);
 END;
 /
+
+
+--EJEMPLO CON CASE
+DECLARE
+	x_emple number;
+	vc_emple number;
+	v_aumento number DEFAULT 0;
+	v_oficio emple.oficio%type;
+BEGIN 
+	
+END;
+/
+
+
 /*8- Construir un bloque PL/SQL para que escriba la cadena HOLA al revés.
 Utilizando FOR, WHILE y LOOP.*/
 
@@ -117,9 +149,34 @@ END;
 --Solución con loop
 
 
---9 Escribir un bloque PL/SQL que introduzca dos números y los sume.
--- Introduzca un valor para v_num1: 20
--- Introduzca un valor para v_num2: 20
--- SUMA=40
+/*9 Escribir un bloque PL/SQL que introduzca dos números y los sume.
+Introduzca un valor para v_num1: 20
+Introduzca un valor para v_num2: 20
+SUMA=40 */
+
+--versión con bloques anónimos
+
+DECLARE
+	num1 number;
+	num2 number;
+	resul number;
+BEGIN
+	num1:=&v_num1;
+	num2:=&v_num2;
+	resultado:= num1 + num2;
+	DBMS_OUTPUT.PUT_LINE("Resultado de la suma: "|| resultado);
+END;
+/
 
 --hecho con procedimientos
+
+CREATE OR REPLACE PROCEDURE SUMANDO(NUM1 NUMBER, NUM2 NUMBER)
+IS
+	RESUL NUMBER(5)
+BEGIN
+	RESUL:=NUM1 + NUM2;
+	DBMS_OUTPUT.PUT_LINE('RESULTADO = '||RESUL);
+END;
+/
+
+EXECUTE SUMANDO(24,42);
