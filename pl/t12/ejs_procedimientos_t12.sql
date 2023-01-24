@@ -13,7 +13,8 @@ END;
 
 EXECUTE SUMA_NUM(21,12);
 
-/* 11- Escribir un procedimiento para consultar los datos de los departamentos mediante el número del departamento (dept_no). Usar el bloque de EXCEPTION para que el programa funcione si no encuentra el departamento. */
+/* 11- Escribir un procedimiento para consultar los datos de los departamentos mediante el número del departamento (dept_no).
+Usar el bloque de EXCEPTION para que el programa funcione si no encuentra el departamento. */
 
 CREATE OR REPLACE PROCEDURE VER_DEP (numdepart number)
 IS
@@ -32,7 +33,9 @@ END;
 EXECUTE VER_DEP(7898);
 
 
-/* 12- Crear un procedimiento que reciba un número de empleado y una cadena correspondiente a su nuevo oficio. El procedimiento deberá localizar el empleado, modificar el oficio y visualizar los cambios realizados.   */
+/* 12- Crear un procedimiento que reciba un número de empleado y una cadena correspondiente a su nuevo oficio.
+El procedimiento deberá localizar el empleado, modificar el oficio y visualizar los cambios realizados.
+*/
 
 CREATE OR REPLACE PROCEDURE VER_OFICIO(TRAB NUMBER, NUEVO_OF VARCHAR2)
 IS

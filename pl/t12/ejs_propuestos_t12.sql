@@ -48,7 +48,8 @@ END;
 /
 
 
-/*5 Realizar un programa que solicite la introducción de un número de empleado y visualizara el nombre correspondiente al número introducido. Para declarar el nombre del empleado utilizaremos la variable %TYPE. */
+/*5 Realizar un programa que solicite la introducción de un número de empleado y visualizara el nombre correspondiente al número introducido.
+Para declarar el nombre del empleado utilizaremos la variable %TYPE. */
 
 DECLARE 
 	v_apellido emple.apellido%type;
@@ -77,7 +78,8 @@ END;
 	- Si tiene mas de tres la subida será de 110€.
 Además si el empleado es PRESIDENTE se incrementara en 30€.
 Resolverlo con IF….ELSE y con CASE.	
-Introduzca un valor para vt_empno: 7839*/
+Introduzca un valor para vt_empno: 7839
+*/
 
 DECLARE
 	x_emple number;
@@ -146,7 +148,6 @@ BEGIN
 END;
 /
 
---Solución con loop
 
 
 /*9 Escribir un bloque PL/SQL que introduzca dos números y los sume.
