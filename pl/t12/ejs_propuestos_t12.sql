@@ -108,17 +108,6 @@ END;
 /
 
 
---EJEMPLO CON CASE
-DECLARE
-	x_emple number;
-	vc_emple number;
-	v_aumento number DEFAULT 0;
-	v_oficio emple.oficio%type;
-BEGIN 
-	
-END;
-/
-
 
 /*8- Construir un bloque PL/SQL para que escriba la cadena HOLA al revés.
 Utilizando FOR, WHILE y LOOP.*/

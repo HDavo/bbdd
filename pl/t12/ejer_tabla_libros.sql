@@ -24,10 +24,9 @@ insert into libros12 values(204,'Alicia en el pais de las maravillas','Carroll',
 /* Creamos una función que reciba 1 parámetro (un valor numérico a incrementar) y retorne el valor ingresado como argumento con el incremento del 10%. */
 
 CREATE OR REPLACE FUNCTION INCREMENTADOR(BASE NUMBER)
-RETURN
-	NUMBER;
+RETURN NUMBER;
 AS
-	RESULTADO NUMBER;
+	RESULTADO NUMBER := 0;
 BEGIN
 	RESULTADO:=BASE*1.10;
 	RETURN(RESULTADO);
@@ -47,7 +46,7 @@ SELECT TITULO, INCREMENTADOR(PRECIO) FROM LIBROS12;
  
  
 CREATE OR REPLACE FUNCTION N_INCREMENTADOR(VALOR1 NUMBER, SUBIDA NUMBER)
-RETURN NUMBER;
+RETURN NUMBER
 AS
 	INCREMENTADO NUMBER;
 BEGIN
@@ -65,11 +64,11 @@ incrementado en un 20% (llamando a la función creada anteriormente,
 enviando como primer argumento el campo "precio" y como segundo argumento el valor "20"). */
 
 
-SELECT TITULO, N_INCREMENTADOR(PRECIO, 20) FROM DUAL;
+SELECT TITULO, N_INCREMENTADOR(PRECIO, 20) FROM LIBROS12;
 
 /* Realizamos otro "select" similar al anterior, pero en esta ocasión le enviamos a la función otro valor como segundo argumento. */
 
-SELECT TITULO, N_INCREMENTADOR(PRECIO,35) FROM DUAL;
+SELECT TITULO, N_INCREMENTADOR(PRECIO,35) FROM LIBROS12;
 
 
 /* Creamos o reemplazamos una función que recibe un parámetro de tipo numérico
@@ -82,7 +81,20 @@ en caso contrario guardamos en tal variable la cadena "costoso";
 al finalizar la estructura condicional retornamos la variable "valorretornado":
  */
 
-
+CREATE OR REPLACE FUNCTION CONVERTIDOR(VALOR_RECIBIDO NUMBER)
+RETURN VARCHAR
+AS
+	VALOR_RETORNADO VARCHAR(50);
+BEGIN
+	IF VALOR_RECIBIDO <=20 THEN
+	VALOR_RETORNADO:='ECONOMICO';
+	ELSE VALOR_RETORNADO:='COSTOSO';
+	END IF;
+	RETURN (VALOR_RETORNADO);
+END;
+/
 
 /* Realizamos un "select" para mostrar el título, precio y una cadena que indique si el libro es económico o costoso
 (llamando a la función creada anteriormente). */
+
+SELECT TITULO, PRECIO, CONVERTIDOR(PRECIO) FROM LIBROS12;
