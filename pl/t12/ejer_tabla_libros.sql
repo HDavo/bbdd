@@ -3,7 +3,7 @@
 drop table libros12;
 
 --volver a crear la tabla
-
+drop table libros12;
 create table libros12(
     codigo number(3),
     titulo varchar2(50),
@@ -24,7 +24,7 @@ insert into libros12 values(204,'Alicia en el pais de las maravillas','Carroll',
 /* Creamos una función que reciba 1 parámetro (un valor numérico a incrementar) y retorne el valor ingresado como argumento con el incremento del 10%. */
 
 CREATE OR REPLACE FUNCTION INCREMENTADOR(BASE NUMBER)
-RETURN NUMBER;
+RETURN NUMBER
 AS
 	RESULTADO NUMBER := 0;
 BEGIN
@@ -64,11 +64,11 @@ incrementado en un 20% (llamando a la función creada anteriormente,
 enviando como primer argumento el campo "precio" y como segundo argumento el valor "20"). */
 
 
-SELECT TITULO, N_INCREMENTADOR(PRECIO, 20) FROM LIBROS12;
+SELECT TITULO, PRECIO, N_INCREMENTADOR(PRECIO, 20) "Subida de precio" FROM LIBROS12;
 
 /* Realizamos otro "select" similar al anterior, pero en esta ocasión le enviamos a la función otro valor como segundo argumento. */
 
-SELECT TITULO, N_INCREMENTADOR(PRECIO,35) FROM LIBROS12;
+SELECT TITULO, PRECIO, N_INCREMENTADOR(PRECIO,35) "Otra subida" FROM LIBROS12;
 
 
 /* Creamos o reemplazamos una función que recibe un parámetro de tipo numérico

@@ -4,7 +4,7 @@
 
 CREATE OR REPLACE PROCEDURE SUMA_NUM(NUM1 NUMBER, NUM2 NUMBER)
 IS
-	RESUL NUMBER(5)
+	RESUL NUMBER(5);
 BEGIN
 	RESUL:=NUM1 + NUM2;
 	DBMS_OUTPUT.PUT_LINE('RESULTADO = '||RESUL);
@@ -23,14 +23,15 @@ IS
 BEGIN 
 	SELECT dnombre, loc into v_dnombre, v_localidad
 	from depart where dept_no = numdepart;
-	dbms_output.put_line("NUMDEPART: "||numdepart||" NOMBRE DEP: "||v_dnombre||" LOCALIDAD: "||v_localidad);
+	dbms_output.put_line('NUMDEPART: '||numdepart||' NOMBRE DEP: '||v_dnombre||' LOCALIDAD: '||v_localidad);
 EXCEPTION
 	when no_data_found then
-	dbms_output.put_line("No se ha encontrado el departamento");
+		dbms_output.put_line('No encontrado el departamento '||numdepart);
 END;
 /
 
 EXECUTE VER_DEP(7898);
+EXECUTE VER_DEP(30);
 
 
 /* 12- Crear un procedimiento que reciba un número de empleado y una cadena correspondiente a su nuevo oficio.
@@ -43,11 +44,12 @@ IS
 BEGIN
 	SELECT OFICIO INTO V_ANTIGUO FROM EMPLE WHERE EMP_NO=TRAB;
 	UPDATE EMPLE SET OFICIO = NUEVO_OF WHERE EMP_NO =  TRAB;
-	DBMS_OUTPUT.PUT_LINE(TRAB|| ' antes era '||V_ANTIGUO|| TRAB||' ahora es '|| OFICIO);
+	DBMS_OUTPUT.PUT_LINE(TRAB|| ' antes era '||V_ANTIGUO|| TRAB||' ahora es '|| NUEVO_OF);
 END;
 /
 
-EXECUTE VER_OFICIO(8989, 'Pepe');
+EXECUTE VER_OFICIO(7934, 'Fontanero');
+
 /* 13- Escribir un procedimiento que modifique el precio de costo de un artículo pasándole el nb del artículo,
 el nuevo precio y la categoría. El procedimiento comprobará que la variación del precio no supere el 2%.
 Usar el bloque de EXCEPTION para que el programa funcione si no encuentra el artículo.
@@ -59,20 +61,19 @@ IS
 	V_NOMBRE ARTICULOS.ARTICULO%TYPE;
 	V_PRECIO ARTICULOS.PRECIO_COSTO%TYPE;
 BEGIN
-	-- select ARTICULO INTO V_NOMBRE, CATEGORIA,PRECIO_COSTO FROM ARTICULOS WHERE ARTICULO = N_NOMBRE;
-	select ARTICULO, PRECIO_COSTO INTO V_NOMBRE,V_PRECIO FROM ARTICULOS WHERE ARTICULO = N_NOMBRE;
-	IF (N_PRECIO <= V_PRECIO*1.02) 
-	UPDATE ARTICULO SET PRECIO_COSTO = N_PRECIO, CATEGORIA = N_CATEGORIA WHERE ARTICULO = N_NOMBRE;
-	DBM.PUT_LINE('Modificación exitosa');
+	SELECT ARTICULO, PRECIO_COSTO INTO V_NOMBRE, V_PRECIO FROM ARTICULOS WHERE ARTICULO = N_NOMBRE AND CATEGORIA = N_CATEGORIA;
+	IF (N_PRECIO <= V_PRECIO*1.02) THEN
+	UPDATE ARTICULOS SET PRECIO_COSTO = N_PRECIO WHERE ARTICULO = N_NOMBRE AND CATEGORIA = N_CATEGORIA;
+	DBMS_OUTPUT.PUT_LINE('Modificación exitosa');
 	ELSE DBMS_OUTPUT.PUT_LINE('Precio demasiado elevado');
 	END IF;
 EXCEPTION
 	WHEN NO_DATA_FOUND THEN
-	DBM.PUT_LINE('Producto no encontrado.');
+	DBMS_OUTPUT.PUT_LINE('Producto no encontrado.');
 END;
 /
 
-EXECUTE MOD_PRECIO('Macarrones', 466, 'Primera');
+EXECUTE MOD_PRECIO('Mantequilla', 2, 'Segunda');
 
 -- 14- Codifica un procedimiento que reciba una cadena y la visualice al revés.
 
@@ -84,7 +85,7 @@ BEGIN
 	FOR i IN REVERSE 1..LENGTH(N_PALABRA) LOOP
 	CADENA:=CADENA||SUBSTR(N_PALABRA,I,1);
 	END LOOP;
-	RETURN CADENA;
+	DBMS_OUTPUT.PUT_LINE('ESTA ES LA PALABRA AL REVES:  '|| CADENA);
 END;
 /
 
